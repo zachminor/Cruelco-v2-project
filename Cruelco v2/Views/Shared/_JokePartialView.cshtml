@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Cruelco_v2.Models.Joke>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Joke</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (var i = 0; i < Model.Count(); i++)
+        {
+            <tr>
+                <td>@Model.ElementAt(i).Opener</td>
+                <td>
+                    @*@Html.ActionLink("Open", "CompleteJoke", new { id = Model.ElementAt(i).JokeId })*@
+                    @Html.ActionLink("Open", "Details", new { id = Model.ElementAt(i).JokeId })
+                    @*| @Html.ActionLink("Edit", "JokeEdit", new { id = Model.ElementAt(i).JokeId })*@
+                    | @Html.ActionLink("Edit", "Edit", new { id = Model.ElementAt(i).JokeId })
+                    @*| <a data-toggle="modal" href="@("#deleteJokeModal" + i)">Delete</a>
+        <div class="modal fade" id="@("deleteJokeModal" + i)" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    @using (Html.BeginForm("DeleteJoke", "Joke"))
+        {
+            <input type="hidden" value="@Model.ElementAt(i).JokeId" name="JokeId" />
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete @Model.ElementAt(i).CompleteJoke</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete @Model.ElementAt(i).CompleteJoke?
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        }
+                </div>
+            </div>
+        </div>*@
+                    | @Html.ActionLink("Delete", "Delete", new { id = Model.ElementAt(i).JokeId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="col-sm-12 form-group">
+    @*<label>Total Jokes:</label> @Model.TotalJokes*@
+</div>
+<div class="col-sm-12">
+    @Html.ActionLink("Add Joke", "Create", null, new { @class = "btn btn-primary" })
+</div>
